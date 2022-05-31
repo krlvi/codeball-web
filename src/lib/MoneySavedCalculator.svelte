@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/Button.svelte';
+	import AddAction from '$lib/AddAction.svelte';
 	import type { Job, ContributionJob } from '$lib/jobs';
 	import RangeSlider from 'svelte-range-slider-pips';
 
@@ -50,7 +51,7 @@
 	);
 	$: approvalRatio = correctlyApprovedContributionsCount / jobs.length;
 	$: approxMonthlyApproved = Math.ceil(approxMonthlyPullRequestsCreated * approvalRatio);
-	$: approvedPullRequestsPerMonth[0] = approxMonthlyApproved
+	$: approvedPullRequestsPerMonth[0] = approxMonthlyApproved;
 
 	const numberFormat = new Intl.NumberFormat('en-US');
 
@@ -86,12 +87,13 @@
 
 	<ul class="flex flex-col items-center gap-2 text-gray-700">
 		<li>
-			Analyzed <strong class="underline underline-offset-2">{contributionsCount}</strong> of the latest contributions
+			Analyzed <strong class="underline underline-offset-2">{contributionsCount}</strong> of the latest
+			contributions
 		</li>
 
 		<li>
-			<strong class="underline underline-offset-2">{mergedWithoutObjectionCount}</strong> where approved without further
-			feedback
+			<strong class="underline underline-offset-2">{mergedWithoutObjectionCount}</strong> where approved
+			without further feedback
 		</li>
 
 		<li>
@@ -104,16 +106,18 @@
 			{#if incorrectlyApprovedContributionsCount === 0}
 				Didn't approve any PR that you wouldn't have
 			{:else}
-				Approved <strong class="underline underline-offset-2">{incorrectlyApprovedContributionsCount}</strong> PRs that
-				you didn't
+				Approved <strong class="underline underline-offset-2"
+					>{incorrectlyApprovedContributionsCount}</strong
+				> PRs that you didn't
 			{/if}
 		</li>
 	</ul>
 
-	<div class="flex flex-col items-center">
-		<div class="mt-4 mb-2">
-			<Button href="https://github.com/sturdy-dev/codeball-action">Set up GitHub Action</Button>
-		</div>
+	<div class="mt-4 mb-2 flex flex-col items-center gap-2">
+		<AddAction {job} />
+		<span>
+			[<a href="https://github.com/sturdy-dev/codeball-action">sturdy-dev/codeball-action</a>]
+		</span>
 	</div>
 
 	<table class="min-w-full divide-y divide-gray-900">
