@@ -7,7 +7,7 @@
 <svelte:head>
 	<title>Codeball -> AI-powered code review</title>
 	<meta name="description" content="AI-powered code review" />
-	<meta name="og:image" content="{ogImage}" />
+	<meta name="og:image" content={ogImage} />
 	<link rel="icon" type="image/svg" href={favIcon} />
 </svelte:head>
 
